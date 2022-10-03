@@ -48,7 +48,7 @@ jobs:
   pr_opened_or_reopened:
     name: pr_opened_or_reopened
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && (github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'review_requested')
+    if: github.event_name == 'pull_request'
     steps:
       - name: Moved PR to ${{env.under_review}}
         uses: leonsteinhaeuser/project-beta-automations@v2.0.1
