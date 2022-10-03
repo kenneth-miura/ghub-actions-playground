@@ -1,23 +1,26 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-# GitHub recommends pinning actions to a commit SHA.
-# To get a newer version, you will need to update the SHA.
-# You can also reference a tag or branch, but the action may change without warning.
-name: Move assigned card
-
+name: Project Automations
 on:
   issues:
-    types: [opened]
+    types: 
+      - opened
+
+env:
+  todo: Todo
+  done: Done
+  in_progress: In Progress
 
 jobs:
-  automate-project-columns:
+  issue_opened:
+    name: issue_opened
     runs-on: ubuntu-latest
+    if: github.event_name == 'issues' && (github.event.action == 'opened' || github.event.action == 'reopened')
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.8.1
+      - name: Move issue to ${{ env.todo }}
+        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
         with:
-          project: Actions
-          column: Todo
-          repo-token: ${{ secrets.GHPROJECT_TOKEN }}
+          gh_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          user: kenneth-miura
+          # organization: sample-org
+          project_id: 1
+          resource_node_id: ${{ github.event.issue.node_id }}
+          status_value: ${{ env.todo }} # Target status 
