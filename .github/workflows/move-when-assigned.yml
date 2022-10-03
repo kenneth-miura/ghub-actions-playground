@@ -57,5 +57,5 @@ jobs:
           user: kenneth-miura
           # organization: sample-org
           project_id: 3
-          resource_node_id: ${{ github.event.issue.node_id }}
+          resource_node_id: ${{ github.event.pull_request.node_id }}
           status_value: ${{ env.under_review }} # Target status
