@@ -31,12 +31,12 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'issues' && github.event.action == 'closed'
     steps:
-      names: Moved issue to ${{env.done}}
-      uses: leonsteinhaeuser/project-beta-automations@v2.0.1
-      with:
-        gh_token: ${{ secrets.GHPROJECT_TOKEN }}
-        user: kenneth-miura
-        # organization: sample-org
-        project_id: 3
-        resource_node_id: ${{ github.event.issue.node_id }}
-        status_value: ${{ env.done }} # Target status
+      - name: Moved issue to ${{env.done}}
+        uses: leonsteinhaeuser/project-beta-automations@v2.0.1
+        with:
+          gh_token: ${{ secrets.GHPROJECT_TOKEN }}
+          user: kenneth-miura
+          # organization: sample-org
+          project_id: 3
+          resource_node_id: ${{ github.event.issue.node_id }}
+          status_value: ${{ env.done }} # Target status
